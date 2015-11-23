@@ -1,0 +1,15 @@
+{
+  "name": "Project-one",
+  "version": "0.0.0",
+  "description": "a project to help express web development proficiency using angularJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Project-one"
+  },
+  "author": "Chris Kayode Alayode Samuel Jr.",
+  "license": "ISC"
+}
