@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<h1>New Page</h1>
+<!-- <h1>New Page</h1> -->
 <section id="common_header" class="common-header alert-{{CommonHeaderCtrl.currentAlert}}" data-ng-class="{true: 'logged-in', false: 'logged-out'}[CommonHeaderCtrl.currentLoggedInUser.hasSession]">
 
   <!-- PHONE: HEADER -->
@@ -148,6 +148,33 @@
 
           </div>
 
+
+
+          <div class="app-header__secondary-nav span8 ipad-width-8">
+          <div class="row">
+          <div class="span12">
+
+          <!-- DESKTOP: SECONDARY NAV -->
+
+          <div class="global-nav-secondary">
+
+          <div class="hbeam-inline global-nav-secondary__item">
+            <div class="global-nav-secondary__label">
+            <a class="block-link" data-ng-click="CommonHeaderCtrl.handleMenuSelect('profile')" data-ng-mouseenter="CommonHeaderCtrl.handleMenuFocus('profile')" data-ng-mouseleave="CommonHeaderCtrl.handleMenuBlur('profile')" class="global-header__link" data-ng-class="{active : CommonHeaderCtrl.isActiveMenu('profile')}">
+                <span class="show-profilelink not-bold">My profile</span>
+                <span class="show-signin not-bold">Sign in</span>
+            </a>
+            <div class="header-dropmenu signin-profile" data-ng-mouseenter="CommonHeaderCtrl.handleMenuFocus('profile')" data-ng-mouseleave="CommonHeaderCtrl.handleMenuBlur('profile')" data-ng-show="CommonHeaderCtrl.isActiveMenu('profile')" >
+                <div class="menu-top">
+
+          </div>
+          </div>
+        </div>
+      </div>
+
+</div>
+</div>
+</div><!-- Header not shown -->
 
 </section>
 
