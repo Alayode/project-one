@@ -14,6 +14,143 @@
 <body>
 
 <h1>New Page</h1>
+<section id="common_header" class="common-header alert-{{CommonHeaderCtrl.currentAlert}}" data-ng-class="{true: 'logged-in', false: 'logged-out'}[CommonHeaderCtrl.currentLoggedInUser.hasSession]">
+
+  <!-- PHONE: HEADER -->
+  <div class="csr-div hidden"> <!--Wrapper div to work-around the issue caused by display:inherit!important given globally-->
+  <div class="pay-bill-csr hidden-desktop hidden-tablet">
+      <span>Currently viewing account details for: <span data-ng-bind-html="currentAccountNumber" class="accno-text"></span></span>
+      <input type="button" value="Sign out" class="btn btn--secondary padding-btn" data-ng-click="CommonHeaderCtrl.handleUserSignout()" />
+  </div>
+  </div>
+  <!-- ALERT DRAWER -->
+    <span id="phoneAlertNotRequired" class="hidden-desktop hidden-tablet" data-ng-show="CommonHeaderCtrl.currentAlertIndex > 0">
+      <div drawer open="drawerModel.isOpen">
+          <div alert-drawer></div>
+      </div>
+    </span>
+
+    <div class="visible-phone global-header hideForNewCustomerStuff" id="newLoginCustomerHeader" >
+  <div class="container">
+  <div class="semflex full-width align-children-middle">
+          <div class="global-header-phone__brand">
+              <a href="/" class="block mobile-logo"></a>
+           </div>
+          </div>
+          </div>
+          </div>
+
+          <div class="visible-phone global-header alert-{{CommonHeaderCtrl.currentAlert}}">
+              <div id="phone_header" class="semflex full-width align-children-middle">
+                  <div class="vpadding-s global-header-phone__brand">
+                      <a href="/" class="block mobile-logo"></a>
+                  </div>
+
+                  <div class="global-nav-secondary__notification" data-ng-show="CommonHeaderCtrl.currentAlertIndex > 0">
+
+                  <a data-ng-click="CommonHeaderCtrl.toggleAlertDrawer()" class="alert-{{CommonHeaderCtrl.currentAlert}}
+                  alert-drawer__handle hbeam-inline badge-notification badge-primary toggle-alert-mrgin">
+                      <div class="hbeam-part-static badge-notification__icon-container">
+                          <i class="badge-notification__icon icon-warning-sign"></i>
+                      </div>
+                      <div>
+                          <span class="badge-notification__count">{{CommonHeaderCtrl.currentAlertIndex}}</span>
+                      </div>
+                  </a>
+              </div>
+
+
+                  <div class="global-header-phone__nav__item align-center icon-search" data-ng-click="CommonHeaderCtrl.toggleMobileSearchBarDisplay()"></div>
+                  <div class="global-header-phone__nav__item align-center icon-align-justify" id="menubutton" data-ng-click="CommonHeaderCtrl.toggleMobileMenuDisplay()"></div>
+              </div>
+              <!-- PHONE:SEARCH -->
+              <div sticky-stack data-ng-show="CommonHeaderCtrl.showingMobileSearchBar" id="phone-search" class="sticky-stack-pseudo auto_complete_display_none">
+                  <div class="phone-search-bar vpadding-s">
+                      <div class="container">
+                          <div class="semflex full-width align-children-middle">
+                              <div class="width_90">
+                                  <div class="full-width searchbar-group input-groupp">
+                                      <div><input id="mobile-global-input" type="text" class="input-lighter-accent full-width inputBackground" placeholder="Search Optimum.net" data-ng-model="CommonHeaderCtrl.searchTerm" data-ng-change="CommonHeaderCtrl.doSearch()"></div>
+                                      <div class="btn search-btn semflex__auto" data-ng-click="CommonHeaderCtrl.phoneGoToSearch(CommonHeaderCtrl.searchCategory.support)"><a class="icon-search"></a></div>
+                                  </div>
+                              </div>
+                              <div class="close-search-wrapper align-right">
+                                  <a class="close-search icon-remove" data-ng-click="CommonHeaderCtrl.toggleMobileSearchBarDisplay()"></a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div> <!-- visible phone -->
+
+          <!-- DESKTOP/TABLET: HEADER -->
+          <div style="min-width:1000px" id="desktop_header">
+          <div sticky-stack class="global-header hidden-phone sticky-stack-pseudo" id="desktop_header_NewCustomer">
+          <div class="pay-bill-csr csr-div hidden">
+              <span>Currently viewing account details for: <span data-ng-bind="currentAccountNumber" class="accno-text"></span></span>
+              <input type="button" value="Sign out" class="btn btn--secondary padding-btn" data-ng-click="CommonHeaderCtrl.handleUserSignout()" />
+          </div>
+
+          <div id="alertNotShown" data-ng-show="CommonHeaderCtrl.currentAlertIndex > 0">
+              <div drawer open="drawerModel.isOpen">
+                  <div alert-drawer></div>
+              </div>
+          </div>
+
+          <div class="container">
+          <div class="toggle-container">
+
+          <div id="headerNotShown" class="row app-header__row-top clear-float">
+          <div class="span4 ipad-width-4">
+
+              <!-- DESKTOP/TABLET: TERTIARE NAV -->
+
+              <div class="vpadding-s">
+
+              <div class="speech-bubble-home-wrapper">
+              <!--
+              <ul class="global-nav-tertiary list-unstyled">
+                    <li class="global-nav-tertiary__item">
+                      <a href="#" class="global-header__link">en Espa&#241;ol</a>
+                    </li>
+              </ul>
+              -->
+
+          <div class="motion-point">
+          		<a mporgnav href="http://espanol.optimum.net"
+          				onclick="return switchLanguage('es');
+          				function switchLanguage(lang) {
+          				MP.SrcUrl=decodeURIComponent('mp_js_orgin_url');
+          				MP.UrlLang='mp_js_current_lang';MP.init();
+          				MP.switchLanguage(MP.UrlLang==lang?'en':lang);
+          				return false;}">en Espa&#241;ol</a>
+          </div>
+
+
+          			<div class="pull-right speech-bubble-home-container" data-ng-show="!CommonHeaderCtrl.currentLoggedInUser.hasSession">
+                          <a href="{{CommonHeaderCtrl.helloMessage.link}}" class="welcome-message speech-balloon speech-balloon--tip-outwards header-user" data-ng-class="{active : CommonHeaderCtrl.currentUserStatus == 'signin'}" data-ng-mouseenter="CommonHeaderCtrl.currentUserStatus='signin'" data-ng-mouseleave="CommonHeaderCtrl.currentUserStatus=''">
+                              <div class="speech-balloon__content"><p class="username-msg"></p></div>
+                              <div class="speech-balloon__tip"></div>
+                          </a>
+                      </div>
+                      <div class="pull-right speech-bubble-home-container" data-ng-show="CommonHeaderCtrl.currentLoggedInUser.hasSession">
+                          <div class="welcome-message speech-balloon speech-balloon--tip-outwards">
+                              <div class="speech-balloon__content row">
+          						<div class="span5 username-msg-div"><a href="{{CommonHeaderCtrl.helloMessage.link}}" class="username-msg">Hi NewUser007</a></div>
+          						<div class="span1 verticalLine"></div>
+          						<div class="span5 signout-msg-div"><a data-ng-click="CommonHeaderCtrl.handleUserSignout()" class="signout-msg">Sign out</a></div>
+          					</div>
+                              <div class="speech-balloon__tip"></div>
+                          </div>
+                      </div>
+                  </div><!--end of speech-bubble-home-wrapper-->
+              </div>
+
+          </div>
+
+
+</section>
+
 
 <div ng-view></div>
 
